@@ -94,7 +94,14 @@ export function EmployeeList({ onOpenDetail, onNewEmployee, refDate }: Props) {
             検索結果：<strong className="text-slate-700">{filtered.length}</strong>件
             （基準日 {formatDateJP(refDate)}）
           </span>
-          <Button onClick={onNewEmployee}>+ 新規登録</Button>
+          <div className="flex gap-2">
+            {search && (
+              <Button variant="secondary" onClick={() => { setSearch(''); resetPage(); }}>
+                検索をクリア
+              </Button>
+            )}
+            <Button onClick={onNewEmployee}>+ 新規登録</Button>
+          </div>
         </div>
       </div>
 
