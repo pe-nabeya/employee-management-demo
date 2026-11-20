@@ -26,13 +26,13 @@ export function EmployeeList({ onOpenDetail, onNewEmployee, refDate }: Props) {
   const [page, setPage] = useState(0);
 
   const filtered = useMemo(() => {
-    const q = search.trim().toLowerCase();
+    const q = search.trim().normalize('NFKC').toLowerCase();
     return employees.filter((e) => {
       if (q) {
         const match =
-          e.employeeNumber.toLowerCase().includes(q) ||
-          e.name.toLowerCase().includes(q) ||
-          e.kana.toLowerCase().includes(q);
+          e.employeeNumber.normalize('NFKC').toLowerCase().includes(q) ||
+          e.name.normalize('NFKC').toLowerCase().includes(q) ||
+          e.kana.normalize('NFKC').toLowerCase().includes(q);
         if (!match) return false;
       }
       if (deptFilter && e.departmentCd !== deptFilter) return false;
